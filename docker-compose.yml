@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    image: surreymagpie/wordpress:latest
+    ports:
+      - 8080:80
+      - 443:443
+    networks:
+      - wpnet
+    volumes:
+      - ./app:/var/www/html
+
+  localhost:
+    image: mariadb:10.4
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: secret
+    volumes:
+      - wpdata:/var/lib/mysql
+    networks:
+      - wpnet
+
+volumes:
+  wpdata:
+
+networks:
+   wpnet:
