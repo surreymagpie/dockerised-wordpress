@@ -13,7 +13,7 @@ services:
     volumes:
       - ./app:/var/www/html
 
-  localhost:
+  db:
     image: mariadb:10.4
     environment:
       MYSQL_ROOT_PASSWORD: root
